@@ -16,24 +16,24 @@ public class SearcherTest {
         try {
             test = new SearcherTest();
             test.search("Lorem");
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void search(String searchQuery) throws IOException, ParseException {
+    private int search(String searchQuery) throws IOException, ParseException {
         searcher = new Searcher(LuceneConstants.indexDir);
         long startTime = System.currentTimeMillis();
         TopDocs hits = searcher.search(searchQuery);
         long endTime = System.currentTimeMillis();
 
-        System.out.println(hits.totalHits + "documents found. Time: " + (endTime - startTime));
+        System.out.println(hits.totalHits + " documents found. Time: " + (endTime - startTime));
         for (ScoreDoc scoreDoc : hits.scoreDocs) {
             Document doc = searcher.getDocument(scoreDoc);
             System.out.println("File: " + doc.get(LuceneSource.LuceneConstants.FILE_PATH));
         }
-        searcher.close();
+        return hits.totalHits;
     }
 }

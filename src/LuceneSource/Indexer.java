@@ -29,7 +29,7 @@ public class Indexer {
 
     protected Document getDocument(File f) throws IOException {
         Document doc = new Document();
-        doc.add(new Field(LuceneConstants.CONTENTS, new FileReader(f), TextField.TYPE_STORED));
+        doc.add(new Field(LuceneConstants.CONTENTS, new FileReader(f), TextField.TYPE_NOT_STORED));
         doc.add(new Field(LuceneConstants.FILE_NAME, f.getName(), StringField.TYPE_STORED));
         doc.add(new Field(LuceneConstants.FILE_PATH, f.getPath(), StringField.TYPE_STORED));
         return doc;
