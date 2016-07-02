@@ -2,9 +2,7 @@ package LuceneSource;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.FieldType;
+import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -32,13 +30,9 @@ public class Indexer {
 
     protected Document getDocument(File f) throws Exception {
         Document doc = new Document();
-        FieldType defaultType = new FieldType();
-        doc.add(new Field(LuceneConstants.CONTENTS, new FileReader(f), defaultType));
-        FieldType storeNotAnalyzerType = new FieldType();
-        storeNotAnalyzerType.setStored(true);
-        storeNotAnalyzerType.setTokenized(false);
-        doc.add(new Field(LuceneConstants.FILE_NAME, f.getName(), storeNotAnalyzerType));
-        doc.add(new Field(LuceneConstants.FILE_PATH, f.getPath(), storeNotAnalyzerType));
+        doc.add(new Field(LuceneConstants.CONTENTS, new FileReader(f), TextField.TYPE_STORED));
+        doc.add(new Field(LuceneConstants.FILE_NAME, f.getName(), StringField.TYPE_STORED));
+        doc.add(new Field(LuceneConstants.FILE_PATH, f.getPath(), StringField.TYPE_STORED));
         return doc;
     }
 
