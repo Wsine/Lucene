@@ -1,5 +1,7 @@
 package LuceneSource;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileFilter;
 
@@ -13,7 +15,7 @@ public class TextFileFilter implements FileFilter {
      * @return 是否通过过滤
      */
     @Override
-    public boolean accept(File f) {
+    public boolean accept(@NotNull File f) {
         return f.getName().toLowerCase().endsWith(".txt");
     }
 }

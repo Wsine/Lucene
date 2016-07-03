@@ -7,6 +7,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -28,7 +29,7 @@ public class Indexer {
      * @param indexDir 存储索引文件的路径
      * @throws IOException
      */
-    public Indexer(String indexDir) throws IOException {
+    public Indexer(@NotNull String indexDir) throws IOException {
         /* 声明磁盘路径 */
         Directory dir = FSDirectory.open(new File(indexDir).toPath());
         /* 使用标准文本解析器（仅支持英文） */
@@ -53,7 +54,7 @@ public class Indexer {
      * @return 描述文档
      * @throws IOException
      */
-    protected Document getDocument(File f) throws IOException {
+    protected Document getDocument(@NotNull File f) throws IOException {
         Document doc = new Document();
         /* 添加描述文档的特定属性 */
         doc.add(new Field(LuceneConstants.CONTENTS, new FileReader(f), TextField.TYPE_NOT_STORED));
@@ -67,7 +68,7 @@ public class Indexer {
      * @param file 输入文件
      * @throws IOException
      */
-    protected void indexFile(File file) throws IOException {
+    protected void indexFile(@NotNull File file) throws IOException {
         System.out.println("Indexing " + file.getCanonicalPath());
         Document document = getDocument(file);
         writer.addDocument(document);
@@ -80,7 +81,7 @@ public class Indexer {
      * @return 索引的文件的数量
      * @throws IOException
      */
-    public int createIndex(String dataDir, FileFilter filter) throws IOException {
+    public int createIndex(@NotNull String dataDir, FileFilter filter) throws IOException {
         File[] files = new File(dataDir).listFiles();
         /* 获取全部的文件创建索引 */
         for (File f : files) {

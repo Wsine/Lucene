@@ -11,6 +11,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class Searcher {
      * @param indexDir 索引存放路径
      * @throws IOException
      */
-    public Searcher(String indexDir) throws IOException {
+    public Searcher(@NotNull String indexDir) throws IOException {
         /* 声明磁盘路径 */
         Directory dir = FSDirectory.open(new File(indexDir).toPath());
         /* 声明路径的读入器 */
@@ -64,7 +65,7 @@ public class Searcher {
      * @throws IOException
      * @throws ParseException
      */
-    public TopDocs search(String searchQuery) throws IOException, ParseException {
+    public TopDocs search(@NotNull String searchQuery) throws IOException, ParseException {
         query = queryParser.parse(searchQuery);
         return indexSearcher.search(query, LuceneConstants.MAX_SEARCH);
     }
@@ -75,7 +76,7 @@ public class Searcher {
      * @return 对应的描述文档
      * @throws IOException
      */
-    public Document getDocument(ScoreDoc scoreDoc) throws IOException {
+    public Document getDocument(@NotNull ScoreDoc scoreDoc) throws IOException {
         return indexSearcher.doc(scoreDoc.doc);
     }
 }

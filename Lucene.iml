@@ -11,5 +11,6 @@
     <orderEntry type="library" name="lucene-core-6.1.0" level="project" />
     <orderEntry type="library" name="lucene-demo-6.1.0" level="project" />
     <orderEntry type="library" name="lucene-queryparser-6.1.0" level="project" />
+    <orderEntry type="library" name="annotations-java8" level="project" />
   </component>
 </module>
