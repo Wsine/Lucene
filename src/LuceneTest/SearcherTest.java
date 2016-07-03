@@ -5,22 +5,19 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
 public class SearcherTest {
     private Searcher searcher;
 
-    public static void main(String[] args) {
-        SearcherTest test;
-        try {
-            test = new SearcherTest();
-            test.search("Lorem");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Test
+    public void testSearch() throws Exception {
+        SearcherTest test = new SearcherTest();
+        assertTrue(4 == test.search("Lorem"));
+        assertTrue(0 == test.search("Wsine"));
     }
 
     private int search(String searchQuery) throws IOException, ParseException {

@@ -8,6 +8,7 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -81,7 +82,7 @@ public class Indexer {
      * @return 索引的文件的数量
      * @throws IOException
      */
-    public int createIndex(@NotNull String dataDir, FileFilter filter) throws IOException {
+    public int createIndex(@NotNull String dataDir, @Nullable FileFilter filter) throws IOException {
         File[] files = new File(dataDir).listFiles();
         /* 获取全部的文件创建索引 */
         for (File f : files) {
