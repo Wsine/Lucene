@@ -20,6 +20,13 @@ public class SearcherTest {
         assertTrue(0 == test.search("Wsine"));
     }
 
+    @Test
+    public void testSearchCN() throws Exception {
+        SearcherTest test = new SearcherTest();
+        assertTrue(1 == test.search("番茄酱"));
+        assertTrue(0 == test.search("辣椒酱"));
+    }
+
     private int search(String searchQuery) throws IOException, ParseException {
         searcher = new Searcher(LuceneConstants.indexDir);
         long startTime = System.currentTimeMillis();

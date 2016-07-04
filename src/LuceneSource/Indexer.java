@@ -1,6 +1,7 @@
 package LuceneSource;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexWriter;
@@ -33,10 +34,11 @@ public class Indexer {
     public Indexer(@NotNull String indexDir) throws IOException {
         /* 声明磁盘路径 */
         Directory dir = FSDirectory.open(new File(indexDir).toPath());
-        /* 使用标准文本解析器（仅支持英文） */
-        Analyzer luceneAnalzer = new StandardAnalyzer();
+        /* 使用标准文本解析器 */
+        Analyzer luceneAnalzer = new SmartChineseAnalyzer(true);
         /* 使用分析器构造索引写入器的配置文件 */
         IndexWriterConfig config = new IndexWriterConfig(luceneAnalzer);
+        config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         /* 构造索引写入器 */
         writer = new IndexWriter(dir, config);
     }
@@ -91,6 +93,7 @@ public class Indexer {
                 indexFile(f);
             }
         }
+        writer.commit();
         return writer.numDocs();
     }
 }

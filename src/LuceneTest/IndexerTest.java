@@ -13,7 +13,7 @@ public class IndexerTest {
     @Test
     public void testCreate() throws Exception {
         IndexerTest test = new IndexerTest();
-        assertTrue(test.createIndex() < 100);
+        assertTrue(test.createIndex() < 1000);
     }
 
     private long createIndex() throws IOException {

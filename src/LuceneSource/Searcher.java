@@ -1,5 +1,6 @@
 package LuceneSource;
 
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -46,8 +47,8 @@ public class Searcher {
         DirectoryReader dirReader = DirectoryReader.open(dir);
         /* 构造索引搜索器 */
         indexSearcher = new IndexSearcher(dirReader);
-        /* 构造关键词解析器，根据文本内容解析，使用标准分析器（仅支持英文） */
-        queryParser = new QueryParser(LuceneConstants.CONTENTS, new StandardAnalyzer());
+        /* 构造关键词解析器，根据文本内容解析，使用标准分析器 */
+        queryParser = new QueryParser(LuceneConstants.CONTENTS, new SmartChineseAnalyzer(true));
     }
 
     /**
